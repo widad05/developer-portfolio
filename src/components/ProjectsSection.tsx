@@ -1,144 +1,145 @@
+import { motion } from "framer-motion";
+import React, { useState } from "react";
+import ProjectModal from "@/components/ProjectModal";
 
-import React from 'react';
-import { motion } from 'framer-motion';
-import GlowCard from './GlowCard';
-import { ArrowRight } from 'lucide-react';
+const projects = [
+  {
+    title: "Veterinary Management Platform",
+    description:
+      "Full-stack SaaS system for managing clinics, appointments, medical records, and users.",
+    tech: ["Laravel", "React", "MySQL","Breeze","Inertia"],
+    status: "Production-level project",
+    live: "https://vet-platform-production.up.railway.app/",
+    code: "https://github.com/your-username/vet-platform",
+  },
+  // {
+  //   title: "Lost Animals System",
+  //   description:
+  //     "Community platform to report, track, and recover lost animals in real-time.",
+  //   tech: ["Laravel", "MySQL", "Maps API"],
+  //   status: "Full-stack app",
+  //   live: "",
+  //   code: "",
+  // },
+  // {
+  //   title: "Developer Portfolio",
+  //   description:
+  //     "Modern interactive portfolio built with React, Tailwind, and Framer Motion.",
+  //   tech: ["React", "Tailwind", "Framer Motion"],
+  //   status: "Personal project",
+  //   live: "",
+  //   code: "",
+  // },
+];
 
-interface Project {
-  id: number;
-  title: string;
-  description: string;
-  techStack: string[];
-  url: string;
-}
+const ProjectsSection = () => {
 
-const ProjectsSection: React.FC = () => {
-  const projects: Project[] = [
-    {
-      id: 1,
-      title: "Project 1",
-      description: "xyz",
-      techStack: ["React", "Node.js", "Express"],
-      url: "#"
-    },
-    {
-      id: 2,
-      title: "Project 2",
-      description: "abc",
-      techStack: ["Vue.js", "Django", "MongoDB"],
-      url: "#"
-    },
-    {
-      id: 3,
-      title: "Project 3",
-      description: "123",
-      techStack: ["Angular", "Flask", "PostgreSQL"],
-      url: "#"
-    },
-    {
-      id: 4,
-      title: "Project 4",
-      description: "456",
-      techStack: ["Svelte", "Ruby on Rails", "MySQL"],
-      url: "#"
-    },
-    {
-      id: 5,
-      title: "Project 5",
-      description: "789",
-      techStack: ["Next.js", "Spring Boot", "SQLite"],
-      url: "#"     
-    },
-    {
-      id : 6,
-      title: "Project 6",
-      description: "101",
-      techStack: ["Golang", "ASP.NET", "Firebase"],
-      url: "#"
-    }
-  ];
-
-  const cardVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: (i: number) => ({
-      opacity: 1,
-      y: 0,
-      transition: {
-        delay: i * 0.1,
-        duration: 0.5,
-        ease: "easeOut"
-      }
-    })
-  };
+  // ✅ MUST BE INSIDE COMPONENT
+  const [selectedProject, setSelectedProject] = useState<any>(null);
 
   return (
-    <section id="projects" className="py-20 px-4 relative overflow-hidden">
-      {/* Premium light effect for top corner */}
-      <div className="corner-light-premium top-0 right-0 opacity-50"></div>
-      
-      {/* Light rays */}
-      <div className="light-ray-premium opacity-20" style={{ top: '30%', right: '-20%', width: '70%', transform: 'rotate(165deg)' }}></div>
-      <div className="light-ray-premium opacity-15" style={{ top: '60%', right: '-10%', width: '50%', transform: 'rotate(150deg)' }}></div>
-      
-      <div className="max-w-6xl mx-auto relative z-10">
-        <motion.h2 
-          className="section-heading-premium relative"
+    <section id="projects" className="container">
+
+      {/* HEADER */}
+      <div className="text-center mb-20">
+        <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
+          className="text-4xl md:text-5xl font-semibold"
         >
-          Featured Projects
+          Selected Projects
         </motion.h2>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {projects.map((project, index) => (
-            <motion.div
-              key={project.id}
-              custom={index}
-              variants={cardVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-            >
-              <GlowCard 
-                intensity={index % 3 === 0 ? 'high' : index % 2 === 0 ? 'medium' : 'low'}
-                className="group h-full"
-                hoverScale={1.03}
-              >
-                <div className="p-6 h-full flex flex-col relative z-10">
-                  {/* Premium highlight effect on hover */}
-                  <div className="absolute -inset-x-4 -inset-y-4 bg-white/5 rounded-xl opacity-0 group-hover:opacity-100 -z-10 blur-2xl transition-opacity"></div>
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-10 bg-gradient-to-br from-white via-white/20 to-transparent transition-all duration-500"></div>
-                  
-                  <h3 className="text-2xl font-bold italic mb-3 group-hover:text-white transition-colors">{project.title}</h3>
-                  <p className="text-white/70 mb-6 group-hover:text-white/90 transition-colors">{project.description}</p>
-                  
-                  <div className="flex flex-wrap gap-2 mb-6 mt-auto">
-                    {project.techStack.map((tech, i) => (
-                      <span 
-                        key={i} 
-                        className="text-xs px-3 py-1 bg-dark-200/50 backdrop-blur-sm border border-white/5 rounded-full text-white/60 group-hover:text-white/90 group-hover:border-white/20 transition-all duration-300"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                  
-                  <a 
-                    href={project.url} 
-                    className="inline-flex items-center gap-1 text-sm text-white/70 hover:text-white group-hover:text-white/90 transition-colors relative mt-auto"
-                  >
-                    <span>View Project</span>
-                    <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
-                    <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-white/30 group-hover:w-full transition-all duration-300"></span>
-                  </a>
-                </div>
-              </GlowCard>
-            </motion.div>
-          ))}
-        </div>
+
+        <p className="mt-5 text-muted max-w-xl mx-auto">
+          A collection of real-world applications I designed and built from scratch,
+          focusing on usability and performance.
+        </p>
       </div>
+
+      {/* PROJECT LIST */}
+      <div className="space-y-6">
+
+        {projects.map((project, i) => (
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            whileHover={{ scale: 1.02 }}
+            transition={{ duration: 0.3 }}
+            className="group card p-8 relative overflow-hidden"
+          >
+
+            {/* hover glow */}
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition bg-gradient-to-r from-[#FFB86B]/10 to-transparent pointer-events-none" />
+
+            {/* TOP ROW */}
+            <div className="flex justify-between items-start">
+
+              <h3 className="text-2xl font-semibold group-hover:text-[#FFB86B] transition">
+                {project.title}
+              </h3>
+
+              <span className="text-xs text-muted border border-white/10 px-3 py-1 rounded-full">
+                {project.status}
+              </span>
+
+            </div>
+
+            {/* DESCRIPTION */}
+            <p className="mt-4 text-muted max-w-2xl">
+              {project.description}
+            </p>
+
+            {/* TECH STACK */}
+            <div className="flex flex-wrap gap-2 mt-6">
+              {project.tech.map((t, idx) => (
+                <span
+                  key={idx}
+                  className="text-xs px-3 py-1 rounded-full border border-white/10 text-muted group-hover:border-[#FFB86B]/40 transition"
+                >
+                  {t}
+                </span>
+              ))}
+            </div>
+
+            {/* ACTION BUTTONS */}
+            <div className="flex gap-3 mt-6">
+
+              {/* LIVE DEMO */}
+              {project.live && (
+                <a
+                  href={project.live}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-primary text-sm"
+                >
+                  Live Demo
+                </a>
+              )}
+
+              {/* VIEW MORE */}
+              <button
+                onClick={() => setSelectedProject(project)}
+                className="btn-secondary text-sm"
+              >
+                View More
+              </button>
+
+            </div>
+
+          </motion.div>
+        ))}
+
+      </div>
+
+      {/* MODAL */}
+      <ProjectModal
+        project={selectedProject}
+        onClose={() => setSelectedProject(null)}
+      />
+
     </section>
   );
 };
