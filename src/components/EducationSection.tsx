@@ -10,14 +10,14 @@ const education = [
       "Full-stack web development program focused on Laravel, React, databases, and software engineering fundamentals.",
   },
   {
-    school: "Specialization Projects",
-    degree: "Full Stack Practice",
-    period: "2024 - Present",
+    school: "High School (Baccalauréat BIOF)",
+    degree: "Physics & Chemistry",
+    period: "2022 - 2023",
     description:
-      "Built real-world applications including a veterinary management platform and lost animal tracking system.",
+      "Completed the Moroccan Baccalauréat in Physics and Chemistry (BIOF stream), with scientific foundation in mathematics and sciences.",
   },
+ 
 ];
-
 const EducationSection = () => {
   return (
     <section className="container">
