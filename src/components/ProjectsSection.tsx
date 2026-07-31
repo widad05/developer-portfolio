@@ -9,7 +9,7 @@ const projects = [
       "Full-stack SaaS system for managing clinics, appointments, medical records, and users.",
     tech: ["Laravel", "React", "MySQL","Breeze","Inertia"],
     status: "Production-level project",
-    live: "https://vet-platform-production.up.railway.app/",
+    live: "https://vet-platform-production-bf90.up.railway.app/",
     code: "https://github.com/your-username/vet-platform",
   },
   // {
